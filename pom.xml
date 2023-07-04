@@ -7,11 +7,30 @@
     <groupId>AMZN</groupId>
     <artifactId>Amazon_Testing_Framework</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>framework</module>
+        <module>regressions-tests</module>
+        <module>domain</module>
+        <module>page-objects</module>
+    </modules>
 
     <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <selenium.version>3.14</selenium.version>
+        <webdrivermanager.version>5.4.0</webdrivermanager.version>
+        <java.version>11</java.version>
+        <testng.version>7.7.1</testng.version>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
     </properties>
+    <dependencies>
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>5.4.0</version>
+        </dependency>
+    </dependencies>
 
 </project>
