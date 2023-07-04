@@ -18,6 +18,16 @@ The project structure is compose of 4 modules:
 - Page-Objects;
 - Regression Tests;
 
+Framework Module: This module contains the core framework components for the Amazon testing framework. It includes classes like BasePage.java and BaseTest.java, which serve as base models for page objects and test cases respectively. These classes provide common functionalities and utilities that can be used across the entire testing framework.
+
+Domain Module: The domain module encapsulates the domain-specific functionality and business logic of the Amazon application. It defines data models, implements business rules, and provides services or utilities specific to the application's domain. This module ensures that the testing framework aligns with the application's core functionality and behaviors.
+
+Page Objects Module: This module focuses on the implementation of Page Object Models (POMs) for the Amazon application. It contains the Page Model Factory, where all the web elements to be tested are declared. The POMs help in organizing the web elements and actions associated with specific pages, making the tests more readable, maintainable, and reusable.
+
+Regression Tests Module: The regression tests module houses the actual test cases for the Amazon application. It utilizes the framework, domain, and page objects modules to create comprehensive regression tests. These tests verify the functionality of the application and ensure that new changes or updates do not introduce regressions or issues.
+
+Each child module in this Maven project plays a specific role in creating a robust and maintainable testing framework for the Amazon application. The separation of concerns allows for modular development, easier debugging, and scalability as the project grows.
+
 ##Framework Module
 
 ###BasePage.java
