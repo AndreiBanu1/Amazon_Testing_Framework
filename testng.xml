@@ -7,9 +7,7 @@
         <listener class-name="org.testng.reporters.XMLReporter" />
         <listener class-name="org.testng.reporters.JUnitXMLReporter" />
         <listener class-name="org.testng.reporters.EmailableReporter" />
-        <listener class-name="org.testng.reporters.HTMLReporter" />
         <listener class-name="org.testng.reporters.TestHTMLReporter" />
-        <listener class-name="org.testng.reporters.jq.Main" />
     </listeners>
 
     <test name="LoginTests">
