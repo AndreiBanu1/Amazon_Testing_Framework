@@ -29,7 +29,6 @@ public class LoginTest extends BaseTest {
                 System.out.println("Test Case testInvalidUsername is invalid: Captcha required!!!");
             }
         } catch (NoSuchElementException e) {
-
         }
         try {
             if (loginPage.errorContainerIsDisplayed()) {
@@ -39,7 +38,6 @@ public class LoginTest extends BaseTest {
 
             }
         } catch (NoSuchElementException e) {
-
         }
     }
 
@@ -60,7 +58,6 @@ public class LoginTest extends BaseTest {
                 System.out.println("Test Case testInvalidPassword is invalid: Captcha required!!!");
             }
         } catch (NoSuchElementException e) {
-
         }
         try {
             if (loginPage.errorContainerIsDisplayed()) {
@@ -69,19 +66,28 @@ public class LoginTest extends BaseTest {
                 System.out.println("Test Case testInvalidPassword Failed:");
             }
         } catch (NoSuchElementException e) {
-
         }
     }
 
-//    @Test()
-//    public void testValidLogin() {
-//        LoginCredentials loginCredentials = new LoginCredentials();
-//        LoginPage loginPage = new LoginPage(driver);
-//        driver.get("https://www.amazon.com");
-//
-//        loginPage.clickLoginButton();
-//        loginPage.enterUsername(loginCredentials.getUsername());
-//        loginPage.clickContinueButton();
-//        loginPage.enterPassword(loginCredentials.getPassword());
-//    }
+    @Test()
+    public void testValidLogin() {
+        LoginCredentials loginCredentials = new LoginCredentials();
+        LoginPage loginPage = new LoginPage(driver);
+        driver.get("https://www.amazon.com");
+
+        loginPage.clickLoginButton();
+        loginPage.enterUsername(loginCredentials.getUsername());
+        loginPage.clickContinueButton();
+        loginPage.enterPassword(loginCredentials.getPassword());
+        loginPage.clickSignInSubmit();
+
+        try {
+            if (loginPage.importantMessageIsDisplayed()) {
+                System.out.println("Test Case testValidLogin is invalid: Captcha required!!!");
+            } else {
+                System.out.println("Test Case testValidLogin Passed: User is logged in");
+            }
+        } catch (NoSuchElementException e) {
+        }
+    }
 }

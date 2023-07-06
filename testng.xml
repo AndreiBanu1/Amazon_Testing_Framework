@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="LoginTestsSuite" parallel="methods">
+
+    <listeners>
+        <listener class-name="org.testng.reporters.XMLReporter" />
+        <listener class-name="org.testng.reporters.JUnitXMLReporter" />
+        <listener class-name="org.testng.reporters.EmailableReporter" />
+        <listener class-name="org.testng.reporters.HTMLReporter" />
+        <listener class-name="org.testng.reporters.TestHTMLReporter" />
+        <listener class-name="org.testng.reporters.jq.Main" />
+    </listeners>
+
+    <test name="LoginTests">
+        <classes>
+            <class name="amzn.framework.login.LoginTest" />
+        </classes>
+    </test>
+</suite>
