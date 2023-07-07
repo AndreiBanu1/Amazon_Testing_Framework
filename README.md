@@ -33,10 +33,23 @@ Each child module in this Maven project plays a specific role in creating a robu
 ##Core module
 This module will contain the BasePage.java and BaseTest.java files and also any other class to be extended in future usage.
 
-###BasePage.java
-All page object classes will extend the BasePage, thus inheriting all the base methods.
-BasePage class will have a constructor which takes a WebDriver object to initialize a WebDriverWait object. The constructor will also be responsible to initialize WebElements via PageFactory. In addition, it will also have some utility wait methods to handle the various waits such as WaitForElementToAppear.
+**BaseTest.java**: Provides the base class for all test classes. It includes common setup and teardown methods for initializing the WebDriver and handling test lifecycle.
+**BasePage.java**: Represents the base page object class that contains common methods and functionalities for interacting with web elements.
 
-###BaseTest.java
-This file contains some basic test setup.
-Every test will extens this class.
+### Domain Module
+
+- **LoginCredentials.java**: Stores the login credentials (username and password) securely. It loads the credentials from the `credentials.txt` file located in the resources directory.
+- **LoginService.java**: Implements the login service, which provides methods for performing login operations.
+- **UserService.java**: Represents the user service, which interacts with user-related functionalities in the application.
+
+### Page Objects Module
+
+- **LoginPage.java**: Defines the page object class for the login page. It includes methods to interact with the login page elements such as entering credentials and clicking buttons.
+- **HomePage.java**: Represents the page object class for the home page. It provides methods for interacting with elements on the home page.
+
+### Regression Tests Module
+
+- **LoginRegressionTest.java**: Contains regression tests for the login functionality. It uses the page objects and the framework's base test class to write test cases for login scenarios.
+
+This project structure provides a modular and organized approach to develop and test the application. Each module has specific responsibilities, enabling better maintainability and testability of the codebase.
+
