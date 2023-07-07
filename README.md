@@ -28,8 +28,15 @@ Regression Tests Module: The regression tests module houses the actual test case
 
 Each child module in this Maven project plays a specific role in creating a robust and maintainable testing framework for the Amazon application. The separation of concerns allows for modular development, easier debugging, and scalability as the project grows.
 
-##Framework Module
+#Framework Module
+
+##Core module
+This module will contain the BasePage.java and BaseTest.java files and also any other class to be extended in future usage.
 
 ###BasePage.java
 All page object classes will extend the BasePage, thus inheriting all the base methods.
 BasePage class will have a constructor which takes a WebDriver object to initialize a WebDriverWait object. The constructor will also be responsible to initialize WebElements via PageFactory. In addition, it will also have some utility wait methods to handle the various waits such as WaitForElementToAppear.
+
+###BaseTest.java
+This file contains some basic test setup.
+Every test will extens this class.
