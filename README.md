@@ -53,3 +53,8 @@ This module will contain the BasePage.java and BaseTest.java files and also any 
 
 This project structure provides a modular and organized approach to develop and test the application. Each module has specific responsibilities, enabling better maintainability and testability of the codebase.
 
+The project contains the following test scenerios:
+  I. Login Module:
+  - test with valid credentials;
+  - test with invalid username;
+  - test with valid username and invalid password;
