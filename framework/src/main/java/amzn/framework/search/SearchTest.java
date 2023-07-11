@@ -2,6 +2,7 @@ package amzn.framework.search;
 
 import amzn.framework.core.BaseTest;
 import amzn.pageobjects.searchmodule.SearchModule;
+import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -28,7 +29,7 @@ public class SearchTest extends BaseTest {
         searchModule.clickSearchButton();
 
         WebDriverWait wait = new WebDriverWait(driver, 10);
-        WebElement searchResultsElement = wait.until(ExpectedConditions.presenceOfElementLocated(searchModule.getSearchResults()));
+        WebElement searchResultsElement = wait.until(ExpectedConditions.presenceOfElementLocated(searchModule.getSearchResultsLocator()));
 
         if (searchResultsElement.isDisplayed()) {
             System.out.println("Test BasicSearch Passed: Search results are displayed");
@@ -38,23 +39,58 @@ public class SearchTest extends BaseTest {
     }
 
     @Test
-    public void advancedSearch() {}
+    public void advancedSearch() {
+        SearchModule searchModule = new SearchModule(driver);
+        driver.get("https://www.amazon.com");
+        searchModule.selectCategory("Electronics");
+        searchModule.enterSearchString(searchString);
+        searchModule.clickSearchButton();
+
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebElement searchResultsElement = wait.until(ExpectedConditions.presenceOfElementLocated(searchModule.getSearchResultsLocator()));
+
+        if (searchResultsElement.isDisplayed()) {
+            System.out.println("Test advancedSearch Passed: Search results are displayed based on specific category selected");
+        } else {
+            System.out.println("Test advancedSearch Failed: Search results are not displayed based on specific category selected");
+        }
+    }
 
     @Test
     public void emptySearch() {
         SearchModule searchModule = new SearchModule(driver);
-        driver.get("https://www.amazon.com");
+        driver.get("https://www.amazon.com/");
 
         searchModule.clickSearchButton();
 
         String currentURL = driver.getCurrentUrl();
-        String expectedURL = "https://www.amazon.com";
+        String expectedURL = "https://www.amazon.com/";
 
         Assert.assertEquals(currentURL, expectedURL, "Test Failed: Current URL is not the same as the initial URL");
     }
 
     @Test
-    public void searchSuggestions() {}
+    public void searchSuggestions() {
+        SearchModule searchModule = new SearchModule(driver);
+        driver.get("https://www.amazon.com/");
+
+        searchModule.enterSearchString(searchString);
+
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebElement searchSuggestionDropdown = wait.until(ExpectedConditions.elementToBeClickable(searchModule.selectSearchSuggestionLocator()));
+
+        String suggestion = "iphone 14 pro max";
+        searchModule.selectSearchSuggestion(suggestion);
+        searchModule.clickSearchButton();
+
+        WebElement searchResultsElement = wait.until(ExpectedConditions.presenceOfElementLocated(searchModule.getSearchResultsLocator()));
+
+        if (searchResultsElement.isDisplayed()) {
+            System.out.println("Test searchSuggestions Passed: Search results are displayed based on selected suggestion");
+        } else {
+            System.out.println("Test searchSuggestions Failed: Search results are not displayed based on selected suggestion");
+        }
+    }
 
     @Test
     public void searchResultSorting() {}
@@ -87,13 +123,13 @@ public class SearchTest extends BaseTest {
         long startTime = System.currentTimeMillis();
 
         WebDriverWait wait = new WebDriverWait(driver, 10);
-        wait.until(ExpectedConditions.presenceOfElementLocated(searchModule.getSearchResults()));
+        wait.until(ExpectedConditions.presenceOfElementLocated(searchModule.getSearchResultsLocator()));
         long responseTime = System.currentTimeMillis() - startTime;
 
         if (responseTime < 5000) {
-            System.out.println("Test SearchPerformance Passed: " + responseTime + " miliseconds." + " Search response time is within acceptable limits.");
+            System.out.println("Test SearchPerformance Passed: " + responseTime + " milliseconds." + " Search response time is within acceptable limits.");
         } else {
-            System.out.println("Test SearchPerformance Failed: " + responseTime + " miliseconds." + " Search response time is too slow.");
+            System.out.println("Test SearchPerformance Failed: " + responseTime + " milliseconds." + " Search response time is too slow.");
         }
     }
 }
