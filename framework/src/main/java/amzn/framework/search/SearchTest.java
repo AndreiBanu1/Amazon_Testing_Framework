@@ -2,8 +2,6 @@ package amzn.framework.search;
 
 import amzn.framework.core.BaseTest;
 import amzn.pageobjects.searchmodule.SearchModule;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -16,6 +14,7 @@ import org.testng.Assert;
 public class SearchTest extends BaseTest {
     private WebDriver driver;
     String searchString = "Iphone 14";
+    String sortMethod = "Price: Low to High";
     @BeforeTest
     public void setup() {
         driver = new ChromeDriver();
@@ -93,11 +92,77 @@ public class SearchTest extends BaseTest {
     }
 
     @Test
-    public void searchResultSorting() {}
+    public void searchResultSorting() {
+        SearchModule searchModule = new SearchModule(driver);
+        driver.get("https://www.amazon.com");
+
+        searchModule.enterSearchString(searchString);
+        searchModule.clickSearchButton();
+        searchModule.selectSortingMethod(sortMethod);
+
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebElement searchResultsElement = wait.until(ExpectedConditions.presenceOfElementLocated(searchModule.getSearchResultsLocator()));
+
+        WebElement sortingMethodSelected = driver.findElement(searchModule.getSortButtonLocator());
+        String selectedSortMethod = sortingMethodSelected.getText();
+
+        if (selectedSortMethod.contains(sortMethod)) {
+            System.out.println("Test Case searchResultSorting Passed: Search results are sorted by the expected method");
+        } else {
+            System.out.println("Test Case searchResultSorting Failed: Search results are not sorted by the expected method");
+        }
+    }
 
     @Test
-    public void pagination() {}
+    public void pagination() {
+        SearchModule searchModule = new SearchModule(driver);
+        driver.get("https://www.amazon.com");
+        searchModule.enterSearchString(searchString);
+        searchModule.clickSearchButton();
 
+        //Wait for the result page to load
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebElement searchResultsElement = wait.until(ExpectedConditions.presenceOfElementLocated(searchModule.getSearchResultsLocator()));
+
+        WebElement resultHeader = driver.findElement(searchModule.getSearchResultHeaderLocator());
+        WebElement moreResultsHeader = driver.findElement(searchModule.getMoreResultHeaderLocator());
+
+        // Get the current URL before clicking on the second page
+        String beforeClickURL = driver.getCurrentUrl();
+
+        boolean allElementsExist = true;
+
+        // Check if resultHeader exists and is displayed
+        if (!resultHeader.isDisplayed()) {
+            allElementsExist = false;
+        }
+
+        // Check if moreResultsHeader exists and is displayed
+        if (!moreResultsHeader.isDisplayed()) {
+            allElementsExist = false;
+        }
+
+        // Click on the second page
+        WebElement pageTwoLink = driver.findElement(searchModule.paginationLinkLocator("2"));
+        pageTwoLink.click();
+
+        // Wait for the page to load
+        wait.until(ExpectedConditions.urlContains("page=2"));
+
+        // Get the current URL after clicking on the second page
+        String afterClickURL = driver.getCurrentUrl();
+
+        if (beforeClickURL.equals(afterClickURL)) {
+            allElementsExist = false;
+        }
+
+        if (allElementsExist) {
+            System.out.println("Test Passed: All elements exist and are displayed and the pagination works.");
+        } else {
+            System.out.println("Test Failed: One or more elements do not exist or are not displayed or the pagination does not work.");
+        }
+
+    }
     @Test
     public void productDetailsFromSearchResult() {}
 
