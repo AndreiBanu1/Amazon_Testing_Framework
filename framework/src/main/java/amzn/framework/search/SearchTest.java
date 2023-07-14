@@ -2,14 +2,15 @@ package amzn.framework.search;
 
 import amzn.framework.core.BaseTest;
 import amzn.pageobjects.searchmodule.SearchModule;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.openqa.selenium.interactions.Actions;
+
 
 public class SearchTest extends BaseTest {
     private WebDriver driver;
@@ -19,7 +20,6 @@ public class SearchTest extends BaseTest {
     public void setup() {
         driver = new ChromeDriver();
     }
-
     @Test
     public void basicSearch() {
         SearchModule searchModule = new SearchModule(driver);
@@ -31,12 +31,11 @@ public class SearchTest extends BaseTest {
         WebElement searchResultsElement = wait.until(ExpectedConditions.presenceOfElementLocated(searchModule.getSearchResultsLocator()));
 
         if (searchResultsElement.isDisplayed()) {
-            System.out.println("Test BasicSearch Passed: Search results are displayed");
+            System.out.println("Test BasicSearch Passed: Search results are displayed.");
         } else {
-            System.out.println("Test BasicSearch Failed: Search results are not displayed");
+            System.out.println("Test BasicSearch Failed: Search results are not displayed.");
         }
     }
-
     @Test
     public void advancedSearch() {
         SearchModule searchModule = new SearchModule(driver);
@@ -54,7 +53,6 @@ public class SearchTest extends BaseTest {
             System.out.println("Test advancedSearch Failed: Search results are not displayed based on specific category selected");
         }
     }
-
     @Test
     public void emptySearch() {
         SearchModule searchModule = new SearchModule(driver);
@@ -67,7 +65,6 @@ public class SearchTest extends BaseTest {
 
         Assert.assertEquals(currentURL, expectedURL, "Test Failed: Current URL is not the same as the initial URL");
     }
-
     @Test
     public void searchSuggestions() {
         SearchModule searchModule = new SearchModule(driver);
@@ -90,7 +87,6 @@ public class SearchTest extends BaseTest {
             System.out.println("Test searchSuggestions Failed: Search results are not displayed based on selected suggestion");
         }
     }
-
     @Test
     public void searchResultSorting() {
         SearchModule searchModule = new SearchModule(driver);
@@ -112,7 +108,6 @@ public class SearchTest extends BaseTest {
             System.out.println("Test Case searchResultSorting Failed: Search results are not sorted by the expected method");
         }
     }
-
     @Test
     public void pagination() {
         SearchModule searchModule = new SearchModule(driver);
@@ -143,8 +138,7 @@ public class SearchTest extends BaseTest {
         }
 
         // Click on the second page
-        WebElement pageTwoLink = driver.findElement(searchModule.paginationLinkLocator("2"));
-        pageTwoLink.click();
+        searchModule.selectSecondPage();
 
         // Wait for the page to load
         wait.until(ExpectedConditions.urlContains("page=2"));
@@ -157,27 +151,106 @@ public class SearchTest extends BaseTest {
         }
 
         if (allElementsExist) {
-            System.out.println("Test Passed: All elements exist and are displayed and the pagination works.");
+            System.out.println("Test case pagination Passed: All elements exist and are displayed and the pagination works.");
         } else {
-            System.out.println("Test Failed: One or more elements do not exist or are not displayed or the pagination does not work.");
+            System.out.println("Test case pagination Failed: One or more elements do not exist or are not displayed or the pagination does not work.");
         }
-
     }
     @Test
-    public void productDetailsFromSearchResult() {}
+    public void productDetailsFromSearchResult() {
+        SearchModule searchModule = new SearchModule(driver);
+        driver.get("https://www.amazon.com");
+        searchModule.enterSearchString(searchString);
+        searchModule.clickSearchButton();
 
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebElement searchResultsElement = wait.until(ExpectedConditions.presenceOfElementLocated(searchModule.getSearchResultsLocator()));
+
+        // Get the current URL before clicking on the item page
+        String beforeClickURL = driver.getCurrentUrl();
+
+        // Click on first item from the list
+        searchModule.clickFirstResult();
+
+        // Wait for the page to load
+        wait.until(ExpectedConditions.urlContains("keywords=Iphone+14"));
+
+        // Get the current URL after clicking on the item page
+        String afterClickURL = driver.getCurrentUrl();
+
+        if (!beforeClickURL.equals(afterClickURL)) {
+            System.out.println("Test productDetailsFromSearchResult Passed: Item page is displayed");
+        } else {
+            System.out.println("Test productDetailsFromSearchResult Failed: Item page is not displayed");
+        }
+    }
     @Test
-    public void searchResultValidation() {}
+    public void searchResultValidation() {
+        SearchModule searchModule = new SearchModule(driver);
+        driver.get("https://www.amazon.com");
+        searchModule.enterSearchString(searchString);
+        searchModule.clickSearchButton();
 
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebElement searchResultsElement = wait.until(ExpectedConditions.presenceOfElementLocated(searchModule.getSearchResultsLocator()));
+
+        searchModule.checkResultsValidation();
+        // Retrieve the results items count from the SearchModule class
+        int resultsItemsCount = searchModule.getResultsItemsCount();
+
+        if (resultsItemsCount > 0) {
+            System.out.println("Test searchResultValidation Passed: Valid search results are displayed");
+            System.out.println("Number of elements with 'Iphone' in title: " + resultsItemsCount);
+        } else {
+            System.out.println("Test searchResultValidation Failed: Valid search results are not displayed");
+        }
+    }
     @Test
-    public void searchAcrossMultipleCategories() {}
+    public void searchAcrossMultipleCategories() {
+        SearchModule searchModule = new SearchModule(driver);
+        driver.get("https://www.amazon.com");
+        searchModule.enterSearchString(searchString);
+        searchModule.clickSearchButton();
 
+        // Wait for page with results to be loaded
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebElement searchResultsElement = wait.until(ExpectedConditions.presenceOfElementLocated(searchModule.getSearchResultsLocator()));
+
+        searchModule.selectBrandFilter();
+
+        // Set low price and high price filter
+        searchModule.setPriceFilter(100, 999);
+
+        // Wait for page with filtered results to be loaded
+        WebElement searchResultsElementAfterFilter = wait.until(ExpectedConditions.presenceOfElementLocated(searchModule.getSearchResultsLocator()));
+
+        if (searchResultsElementAfterFilter.isDisplayed()) {
+            System.out.println("Test searchAcrossMultipleCategories Passed: Search results are displayed with filters applied.");
+        } else {
+            System.out.println("Test searchAcrossMultipleCategories Failed: Search results are not displayed with filters applied.");
+        }
+    }
     @Test
-    public void searchResultImages() {}
+    public void searchResultImages() {
+        SearchModule searchModule = new SearchModule(driver);
+        driver.get("https://www.amazon.com");
+        searchModule.enterSearchString(searchString);
+        searchModule.clickSearchButton();
 
-    @Test
-    public void searchResultLinkValidity() {}
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebElement searchResultsElement = wait.until(ExpectedConditions.presenceOfElementLocated(searchModule.getSearchResultsLocator()));
 
+        searchModule.countImageResults();
+        int imagesNo = searchModule.getImageResultsCount();
+
+        if (imagesNo > 1) {
+            System.out.println("Test searchResultImages Passed: Search results images are displayed accordingly.");
+            System.out.println("Number of images: " + imagesNo);
+        } else {
+            System.out.println("Test BasicSearch Failed: Search results images are not displayed accordingly.");
+            System.out.println("Number of images: " + imagesNo);
+        }
+    }
     @Test
     public void searchPerformance() {
         SearchModule searchModule = new SearchModule(driver);
@@ -197,4 +270,63 @@ public class SearchTest extends BaseTest {
             System.out.println("Test SearchPerformance Failed: " + responseTime + " milliseconds." + " Search response time is too slow.");
         }
     }
+    @Test
+    public void searchResultLinkValidity() {
+        SearchModule searchModule = new SearchModule(driver);
+        driver.get("https://www.amazon.com");
+        searchModule.enterSearchString(searchString);
+        searchModule.clickSearchButton();
+        boolean testPassed = false;
+
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebElement searchResultsElement = wait.until(ExpectedConditions.presenceOfElementLocated(searchModule.getSearchResultsLocator()));
+
+        // Get the current URL before clicking on the item page
+        String beforeClickURL = driver.getCurrentUrl();
+
+        // Click on first item from the list
+        searchModule.clickFirstResult();
+
+        // Wait for the page to load
+        wait.until(ExpectedConditions.urlContains("keywords=Iphone+14"));
+
+        // Get the current URL after clicking on the item page
+        String afterClickURL = driver.getCurrentUrl();
+
+        if (!beforeClickURL.equals(afterClickURL)) {
+            testPassed = true;
+        }
+
+        driver.navigate().back();
+
+        // Click on the second page
+        searchModule.selectSecondPage();
+        wait.until(ExpectedConditions.urlContains("page=2"));
+        wait.until(ExpectedConditions.presenceOfElementLocated(searchModule.getFirstResultInSearchListLocator()));
+        WebElement firstResultLink = driver.findElement(searchModule.getFirstResultInSearchListLocator());
+        try {
+            Actions actions = new Actions(driver);
+            actions.moveToElement(firstResultLink).click().perform();
+        } catch (ElementClickInterceptedException e) {
+            // Handle the ElementClickInterceptedException
+            // Wait for the interfering element to become invisible
+            wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("a-size-base")));
+
+            // Retry the click
+            firstResultLink.click();
+        }
+
+        String afterClickSecondURL = driver.getCurrentUrl();
+
+        if (!beforeClickURL.equals(afterClickURL)) {
+            testPassed = true;
+        }
+
+        if (testPassed) {
+            System.out.println("Test case searchResultLinkValidity Passed: Results have valid links.");
+        } else {
+            System.out.println("Test case searchResultLinkValidity Failed: One or more results do not have valid links.");
+        }
+    }
+
 }
