@@ -54,55 +54,55 @@ This module will contain the BasePage.java and BaseTest.java files and also any 
 This project structure provides a modular and organized approach to develop and test the application. Each module has specific responsibilities, enabling better maintainability and testability of the codebase.
 
 The project contains the following test scenerios: </br>
-  I. Login Module:
-  a) test with valid credentials;
-  b) test with invalid username;
-  c) test with valid username and invalid password;
+  #I. Login Module:
+  a) test with valid credentials; <br>
+  b) test with invalid username;<br>
+  c) test with valid username and invalid password; <br>
 
-II. Search Module:
-a) Basic Search:
-    - Test that you can enter a keyword in the search bar and perform a search.
-    - Verify that the search results page is displayed, showing products related to the entered keyword.
+#II. Search Module:<br>
+a) Basic Search:<br>
+    - Test that you can enter a keyword in the search bar and perform a search.<br>
+    - Verify that the search results page is displayed, showing products related to the entered keyword.<br>
 
-b) Advanced Search:
-    - Test the advanced search options such as filtering by category, brand, price range, ratings, etc.
-    - Verify that the search results reflect the selected filters accurately.
+b) Advanced Search:<br>
+    - Test the advanced search options such as filtering by category, brand, price range, ratings, etc.<br>
+    - Verify that the search results reflect the selected filters accurately.<br>
 
-c) Empty Search:
-    - Test performing a search without entering any keyword.
-    - Verify that an appropriate error message is displayed, prompting the user to enter a valid keyword.
+c) Empty Search:<br>
+    - Test performing a search without entering any keyword.<br>
+    - Verify that an appropriate error message is displayed, prompting the user to enter a valid keyword.<br>
 
-d) Search Suggestions:
-    - Test the search suggestions feature that provides auto-complete suggestions while typing in the search bar.
-    - Verify that relevant suggestions are displayed based on the entered keywords.
+d) Search Suggestions:<br>
+    - Test the search suggestions feature that provides auto-complete suggestions while typing in the search bar.<br>
+    - Verify that relevant suggestions are displayed based on the entered keywords.<br>
 
-e) Search Results Sorting:
-    - Test the sorting options on the search results page (e.g., relevance, price low to high, price high to low, customer ratings, etc.).
-    - Verify that the sorting order of the search results is accurate as per the selected sorting option.
+e) Search Results Sorting:<br>
+    - Test the sorting options on the search results page (e.g., relevance, price low to high, price high to low, customer ratings, etc.).<br>
+    - Verify that the sorting order of the search results is accurate as per the selected sorting option.<br>
 
-f) Pagination:
-    - Test the pagination feature on the search results page.
-    - Verify that the page navigation options (previous page, next page) are working correctly, and the correct results are displayed when navigating through different pages.
+f) Pagination:<br>
+    - Test the pagination feature on the search results page.<br>
+    - Verify that the page navigation options (previous page, next page) are working correctly, and the correct results are displayed when navigating through different pages.<br>
 
-g) Product Details from Search Results:
-    - Test clicking on a product from the search results to view its details.
-     - Verify that the product details page is displayed with accurate information, including the product title, price, description, and customer reviews.
+g) Product Details from Search Results:<br>
+    - Test clicking on a product from the search results to view its details.<br>
+     - Verify that the product details page is displayed with accurate information, including the product title, price, description, and customer reviews.<br>
 
-h) Search Performance and Speed:
-    - Test the search performance and speed by entering various keywords and monitoring the response time.
-    - Verify that the search results are returned within an acceptable time frame.
+h) Search Performance and Speed:<br>
+    - Test the search performance and speed by entering various keywords and monitoring the response time.<br>
+    - Verify that the search results are returned within an acceptable time frame.<br>
 
-i) Search Result Validation:
-    - Test the accuracy of the search results by searching for specific products or known keywords.
-    - Verify that the expected products are displayed in the search results and that irrelevant or unrelated products are not included.
+i) Search Result Validation:<br>
+    - Test the accuracy of the search results by searching for specific products or known keywords.<br>
+    - Verify that the expected products are displayed in the search results and that irrelevant or unrelated products are not included.<br>
 
-j) Search Across Multiple Categories:
-    - Test performing searches across different categories (e.g., books, electronics, clothing, etc.).
-    - Verify that the search results are relevant and specific to the selected category.
+j) Search Across Multiple Categories:<br>
+    - Test performing searches across different categories (e.g., books, electronics, clothing, etc.).<br>
+    - Verify that the search results are relevant and specific to the selected category.<br>
 
-k) Search Result Images:
-    - Test that the search results display appropriate product images.
-    - Verify that the images are of good quality, properly aligned, and represent the corresponding products accurately.
+k) Search Result Images:<br>
+    - Test that the search results display appropriate product images.<br>
+    - Verify that the images are of good quality, properly aligned, and represent the corresponding products accurately.<br>
 
-l) Search Result Link Validity:
-    - Test clicking on various search result links to ensure that they are valid and lead to the correct product or category pages.
+l) Search Result Link Validity:<br>
+    - Test clicking on various search result links to ensure that they are valid and lead to the correct product or category pages.<br>
