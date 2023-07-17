@@ -55,6 +55,54 @@ This project structure provides a modular and organized approach to develop and 
 
 The project contains the following test scenerios: </br>
   I. Login Module:
-  - test with valid credentials;
-  - test with invalid username;
-  - test with valid username and invalid password;
+  a) test with valid credentials;
+  b) test with invalid username;
+  c) test with valid username and invalid password;
+
+II. Search Module:
+a) Basic Search:
+    - Test that you can enter a keyword in the search bar and perform a search.
+    - Verify that the search results page is displayed, showing products related to the entered keyword.
+
+b) Advanced Search:
+    - Test the advanced search options such as filtering by category, brand, price range, ratings, etc.
+    - Verify that the search results reflect the selected filters accurately.
+
+c) Empty Search:
+    - Test performing a search without entering any keyword.
+    - Verify that an appropriate error message is displayed, prompting the user to enter a valid keyword.
+
+d) Search Suggestions:
+    - Test the search suggestions feature that provides auto-complete suggestions while typing in the search bar.
+    - Verify that relevant suggestions are displayed based on the entered keywords.
+
+e) Search Results Sorting:
+    - Test the sorting options on the search results page (e.g., relevance, price low to high, price high to low, customer ratings, etc.).
+    - Verify that the sorting order of the search results is accurate as per the selected sorting option.
+
+f) Pagination:
+    - Test the pagination feature on the search results page.
+    - Verify that the page navigation options (previous page, next page) are working correctly, and the correct results are displayed when navigating through different pages.
+
+g) Product Details from Search Results:
+    - Test clicking on a product from the search results to view its details.
+     - Verify that the product details page is displayed with accurate information, including the product title, price, description, and customer reviews.
+
+h) Search Performance and Speed:
+    - Test the search performance and speed by entering various keywords and monitoring the response time.
+    - Verify that the search results are returned within an acceptable time frame.
+
+i) Search Result Validation:
+    - Test the accuracy of the search results by searching for specific products or known keywords.
+    - Verify that the expected products are displayed in the search results and that irrelevant or unrelated products are not included.
+
+j) Search Across Multiple Categories:
+    - Test performing searches across different categories (e.g., books, electronics, clothing, etc.).
+    - Verify that the search results are relevant and specific to the selected category.
+
+k) Search Result Images:
+    - Test that the search results display appropriate product images.
+    - Verify that the images are of good quality, properly aligned, and represent the corresponding products accurately.
+
+l) Search Result Link Validity:
+    - Test clicking on various search result links to ensure that they are valid and lead to the correct product or category pages.
