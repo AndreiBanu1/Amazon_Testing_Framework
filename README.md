@@ -36,30 +36,30 @@ This module will contain the BasePage.java and BaseTest.java files and also any 
 **BaseTest.java**: Provides the base class for all test classes. It includes common setup and teardown methods for initializing the WebDriver and handling test lifecycle.
 **BasePage.java**: Represents the base page object class that contains common methods and functionalities for interacting with web elements.
 
-### Domain Module
+## Domain Module
 
 - **LoginCredentials.java**: Stores the login credentials (username and password) securely. It loads the credentials from the `credentials.txt` file located in the resources directory.
 - **LoginService.java**: Implements the login service, which provides methods for performing login operations.
 - **UserService.java**: Represents the user service, which interacts with user-related functionalities in the application.
 
-### Page Objects Module
+## Page Objects Module
 
 - **LoginPage.java**: Defines the page object class for the login page. It includes methods to interact with the login page elements such as entering credentials and clicking buttons.
 - **HomePage.java**: Represents the page object class for the home page. It provides methods for interacting with elements on the home page.
 
-### Regression Tests Module
+## Regression Tests Module
 
 - **LoginRegressionTest.java**: Contains regression tests for the login functionality. It uses the page objects and the framework's base test class to write test cases for login scenarios.
 
 This project structure provides a modular and organized approach to develop and test the application. Each module has specific responsibilities, enabling better maintainability and testability of the codebase.
 
 The project contains the following test scenerios: </br>
-  #I. Login Module:
+  ### I. Login Module:
   a) test with valid credentials; <br>
   b) test with invalid username;<br>
   c) test with valid username and invalid password; <br>
 
-#II. Search Module:<br>
+### II. Search Module:<br>
 a) Basic Search:<br>
     - Test that you can enter a keyword in the search bar and perform a search.<br>
     - Verify that the search results page is displayed, showing products related to the entered keyword.<br>
