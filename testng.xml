@@ -15,4 +15,9 @@
             <class name="amzn.framework.login.LoginTest" />
         </classes>
     </test>
+    <test name="SearchTests">
+        <classes>
+            <class name="amzn.framework.search.SearchTest" />
+        </classes>
+    </test>
 </suite>
