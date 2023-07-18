@@ -1,9 +1,11 @@
 package amzn.framework.search;
 
 import amzn.framework.core.BaseTest;
+import amzn.domain.constants.TestConstants;
 import amzn.pageobjects.searchmodule.SearchModule;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -14,22 +16,23 @@ import org.openqa.selenium.interactions.Actions;
 
 public class SearchTest extends BaseTest {
     private WebDriver driver;
-    String searchString = "Iphone 14";
     String sortMethod = "Price: Low to High";
-    @BeforeTest
+     @BeforeTest
     public void setup() {
-        driver = new ChromeDriver();
+         ChromeOptions options = new ChromeOptions();
+         options.addArguments("--headless");
+         driver = new ChromeDriver(options);
     }
     @Test
     public void basicSearch() {
         SearchModule searchModule = new SearchModule(driver);
+        WebDriverWait wait = new WebDriverWait(driver, 10);
         driver.get("https://www.amazon.com");
-        searchModule.enterSearchString(searchString);
+
+        searchModule.enterSearchString(TestConstants.SEARCH_STRING);
         searchModule.clickSearchButton();
 
-        WebDriverWait wait = new WebDriverWait(driver, 10);
         WebElement searchResultsElement = wait.until(ExpectedConditions.presenceOfElementLocated(searchModule.getSearchResultsLocator()));
-
         if (searchResultsElement.isDisplayed()) {
             System.out.println("Test BasicSearch Passed: Search results are displayed.");
         } else {
@@ -41,7 +44,7 @@ public class SearchTest extends BaseTest {
         SearchModule searchModule = new SearchModule(driver);
         driver.get("https://www.amazon.com");
         searchModule.selectCategory("Electronics");
-        searchModule.enterSearchString(searchString);
+        searchModule.enterSearchString(TestConstants.SEARCH_STRING);
         searchModule.clickSearchButton();
 
         WebDriverWait wait = new WebDriverWait(driver, 10);
@@ -70,7 +73,7 @@ public class SearchTest extends BaseTest {
         SearchModule searchModule = new SearchModule(driver);
         driver.get("https://www.amazon.com/");
 
-        searchModule.enterSearchString(searchString);
+        searchModule.enterSearchString(TestConstants.SEARCH_STRING);
 
         WebDriverWait wait = new WebDriverWait(driver, 10);
         WebElement searchSuggestionDropdown = wait.until(ExpectedConditions.elementToBeClickable(searchModule.selectSearchSuggestionLocator()));
@@ -92,7 +95,7 @@ public class SearchTest extends BaseTest {
         SearchModule searchModule = new SearchModule(driver);
         driver.get("https://www.amazon.com");
 
-        searchModule.enterSearchString(searchString);
+        searchModule.enterSearchString(TestConstants.SEARCH_STRING);
         searchModule.clickSearchButton();
         searchModule.selectSortingMethod(sortMethod);
 
@@ -112,7 +115,7 @@ public class SearchTest extends BaseTest {
     public void pagination() {
         SearchModule searchModule = new SearchModule(driver);
         driver.get("https://www.amazon.com");
-        searchModule.enterSearchString(searchString);
+        searchModule.enterSearchString(TestConstants.SEARCH_STRING);
         searchModule.clickSearchButton();
 
         //Wait for the result page to load
@@ -160,7 +163,7 @@ public class SearchTest extends BaseTest {
     public void productDetailsFromSearchResult() {
         SearchModule searchModule = new SearchModule(driver);
         driver.get("https://www.amazon.com");
-        searchModule.enterSearchString(searchString);
+        searchModule.enterSearchString(TestConstants.SEARCH_STRING);
         searchModule.clickSearchButton();
 
         WebDriverWait wait = new WebDriverWait(driver, 10);
@@ -188,7 +191,7 @@ public class SearchTest extends BaseTest {
     public void searchResultValidation() {
         SearchModule searchModule = new SearchModule(driver);
         driver.get("https://www.amazon.com");
-        searchModule.enterSearchString(searchString);
+        searchModule.enterSearchString(TestConstants.SEARCH_STRING);
         searchModule.clickSearchButton();
 
         WebDriverWait wait = new WebDriverWait(driver, 10);
@@ -209,7 +212,7 @@ public class SearchTest extends BaseTest {
     public void searchAcrossMultipleCategories() {
         SearchModule searchModule = new SearchModule(driver);
         driver.get("https://www.amazon.com");
-        searchModule.enterSearchString(searchString);
+        searchModule.enterSearchString(TestConstants.SEARCH_STRING);
         searchModule.clickSearchButton();
 
         // Wait for page with results to be loaded
@@ -234,7 +237,7 @@ public class SearchTest extends BaseTest {
     public void searchResultImages() {
         SearchModule searchModule = new SearchModule(driver);
         driver.get("https://www.amazon.com");
-        searchModule.enterSearchString(searchString);
+        searchModule.enterSearchString(TestConstants.SEARCH_STRING);
         searchModule.clickSearchButton();
 
         WebDriverWait wait = new WebDriverWait(driver, 10);
@@ -256,7 +259,7 @@ public class SearchTest extends BaseTest {
         SearchModule searchModule = new SearchModule(driver);
         driver.get("https://www.amazon.com");
 
-        searchModule.enterSearchString(searchString);
+        searchModule.enterSearchString(TestConstants.SEARCH_STRING);
         searchModule.clickSearchButton();
         long startTime = System.currentTimeMillis();
 
@@ -274,7 +277,7 @@ public class SearchTest extends BaseTest {
     public void searchResultLinkValidity() {
         SearchModule searchModule = new SearchModule(driver);
         driver.get("https://www.amazon.com");
-        searchModule.enterSearchString(searchString);
+        searchModule.enterSearchString(TestConstants.SEARCH_STRING);
         searchModule.clickSearchButton();
         boolean testPassed = false;
 
@@ -328,5 +331,4 @@ public class SearchTest extends BaseTest {
             System.out.println("Test case searchResultLinkValidity Failed: One or more results do not have valid links.");
         }
     }
-
 }

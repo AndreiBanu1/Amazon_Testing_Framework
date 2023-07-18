@@ -11,6 +11,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import java.util.List;
 public class SearchModule extends BasePage{
     private By searchFieldLocator = By.id("twotabsearchtextbox");
+
+    public By getSearchFieldLocator() {
+        return searchFieldLocator;
+    }
     private By searchButtonLocator = By.id("nav-search-submit-button");
     private By searchFiltersLocator = By.id("searchDropdownBox");
     private By searchResultsLocator = By.xpath("//*[@id=\"search\"]/div[1]");
