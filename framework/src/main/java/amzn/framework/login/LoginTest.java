@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+import amzn.domain.constants.TestConstants;
 
 public class LoginTest extends BaseTest {
     private WebDriver driver;
@@ -19,7 +20,7 @@ public class LoginTest extends BaseTest {
     @Test
     public void testInvalidUsername() {
         LoginPage loginPage = new LoginPage(driver);
-        driver.get("https://www.amazon.com");
+        driver.get(TestConstants.WEBSITE);
 
         loginPage.clickLoginButton();
         loginPage.enterUsername("yourUsername");
@@ -45,7 +46,7 @@ public class LoginTest extends BaseTest {
     public void testInvalidPassword() {
         LoginCredentials loginCredentials = new LoginCredentials();
         LoginPage loginPage = new LoginPage(driver);
-        driver.get("https://www.amazon.com");
+        driver.get(TestConstants.WEBSITE);
 
         loginPage.clickLoginButton();
         loginPage.enterUsername(loginCredentials.getUsername());
@@ -73,7 +74,7 @@ public class LoginTest extends BaseTest {
     public void testValidLogin() {
         LoginCredentials loginCredentials = new LoginCredentials();
         LoginPage loginPage = new LoginPage(driver);
-        driver.get("https://www.amazon.com");
+        driver.get(TestConstants.WEBSITE);
 
         loginPage.clickLoginButton();
         loginPage.enterUsername(loginCredentials.getUsername());

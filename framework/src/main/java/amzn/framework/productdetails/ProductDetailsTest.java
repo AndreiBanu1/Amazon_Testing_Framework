@@ -19,36 +19,37 @@ import java.util.List;
 public class ProductDetailsTest extends BaseTest {
     private WebDriver driver;
     private RotateProxy rotateProxy;
-//    @BeforeTest
-//    public void setup() {
-//        ChromeOptions options = new ChromeOptions();
-//        options.addArguments("--headless");
-//
-//        // Retrieve the list of proxy data
-//        List<String> proxies = RotateProxy.getFreeProxies();
-//        rotateProxy = new RotateProxy(proxies);
-//        // Get the index of the current proxy to use
-//        int currentIndex = rotateProxy.getCurrentIndex();
-//        // Set the proxy for rotation
-//        options.addArguments("--proxy-server=" + rotateProxy.getCurrentProxy());
-//        driver = new ChromeDriver(options);
-//    }
+    @BeforeTest
+    public void setup() {
+        // Create an instance of RotateProxy
+        rotateProxy = new RotateProxy();
 
-//    @BeforeMethod
-//    public void beforeEachTest() {
-//        // Rotate to the next proxy for each test method
-//        String nextProxy = rotateProxy.getNextProxy();
-//        ChromeOptions options = new ChromeOptions();
+        // Get the next available proxy IP and port
+        String nextProxy = rotateProxy.getRandomProxy();
+        String[] proxyComponents = nextProxy.split(":");
+        String nextProxyIP = proxyComponents[0];
+        String nextProxyPort = proxyComponents[1];
+
+        // Printing the current proxy being used
+        System.out.println("Current IP: " + nextProxyIP);
+        System.out.println("Current Port: " + nextProxyPort);
+        System.out.println("Current Proxy: " + nextProxyIP + ":" + nextProxyPort);
+
+        // Set the proxy for rotation
+        ChromeOptions options = new ChromeOptions();
 //        options.addArguments("--headless");
-//        options.addArguments("--proxy-server=" + nextProxy);
-//        driver = new ChromeDriver(options);
-//    }
+        options.addArguments("--proxy-server=" + nextProxyIP + ":" + nextProxyPort);
+
+        // Initialize the ChromeDriver with the proxy settings
+        driver = new ChromeDriver(options);
+    }
+
     @Test
     public void verifyItemTitle() {
         ProductDetails productDetails = new ProductDetails(driver);
         SearchModule searchModule = new SearchModule(driver);
         WebDriverWait wait = new WebDriverWait(driver, 10);
-        driver.get("https://www.amazon.com");
+        driver.get(TestConstants.WEBSITE);
 
         searchModule.enterSearchString(TestConstants.SEARCH_STRING);
         searchModule.clickSearchButton();

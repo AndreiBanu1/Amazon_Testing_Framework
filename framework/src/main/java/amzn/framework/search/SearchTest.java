@@ -27,7 +27,7 @@ public class SearchTest extends BaseTest {
     public void basicSearch() {
         SearchModule searchModule = new SearchModule(driver);
         WebDriverWait wait = new WebDriverWait(driver, 10);
-        driver.get("https://www.amazon.com");
+        driver.get(TestConstants.WEBSITE);
 
         searchModule.enterSearchString(TestConstants.SEARCH_STRING);
         searchModule.clickSearchButton();
@@ -42,7 +42,7 @@ public class SearchTest extends BaseTest {
     @Test
     public void advancedSearch() {
         SearchModule searchModule = new SearchModule(driver);
-        driver.get("https://www.amazon.com");
+        driver.get(TestConstants.WEBSITE);
         searchModule.selectCategory("Electronics");
         searchModule.enterSearchString(TestConstants.SEARCH_STRING);
         searchModule.clickSearchButton();
@@ -59,7 +59,7 @@ public class SearchTest extends BaseTest {
     @Test
     public void emptySearch() {
         SearchModule searchModule = new SearchModule(driver);
-        driver.get("https://www.amazon.com/");
+        driver.get(TestConstants.WEBSITE);
 
         searchModule.clickSearchButton();
 
@@ -71,7 +71,7 @@ public class SearchTest extends BaseTest {
     @Test
     public void searchSuggestions() {
         SearchModule searchModule = new SearchModule(driver);
-        driver.get("https://www.amazon.com/");
+        driver.get(TestConstants.WEBSITE);
 
         searchModule.enterSearchString(TestConstants.SEARCH_STRING);
 
@@ -93,7 +93,7 @@ public class SearchTest extends BaseTest {
     @Test
     public void searchResultSorting() {
         SearchModule searchModule = new SearchModule(driver);
-        driver.get("https://www.amazon.com");
+        driver.get(TestConstants.WEBSITE);
 
         searchModule.enterSearchString(TestConstants.SEARCH_STRING);
         searchModule.clickSearchButton();
@@ -114,7 +114,7 @@ public class SearchTest extends BaseTest {
     @Test
     public void pagination() {
         SearchModule searchModule = new SearchModule(driver);
-        driver.get("https://www.amazon.com");
+        driver.get(TestConstants.WEBSITE);
         searchModule.enterSearchString(TestConstants.SEARCH_STRING);
         searchModule.clickSearchButton();
 
@@ -162,7 +162,7 @@ public class SearchTest extends BaseTest {
     @Test
     public void productDetailsFromSearchResult() {
         SearchModule searchModule = new SearchModule(driver);
-        driver.get("https://www.amazon.com");
+        driver.get(TestConstants.WEBSITE);
         searchModule.enterSearchString(TestConstants.SEARCH_STRING);
         searchModule.clickSearchButton();
 
@@ -190,7 +190,7 @@ public class SearchTest extends BaseTest {
     @Test
     public void searchResultValidation() {
         SearchModule searchModule = new SearchModule(driver);
-        driver.get("https://www.amazon.com");
+        driver.get(TestConstants.WEBSITE);
         searchModule.enterSearchString(TestConstants.SEARCH_STRING);
         searchModule.clickSearchButton();
 
@@ -211,7 +211,7 @@ public class SearchTest extends BaseTest {
     @Test
     public void searchAcrossMultipleCategories() {
         SearchModule searchModule = new SearchModule(driver);
-        driver.get("https://www.amazon.com");
+        driver.get(TestConstants.WEBSITE);
         searchModule.enterSearchString(TestConstants.SEARCH_STRING);
         searchModule.clickSearchButton();
 
@@ -236,7 +236,7 @@ public class SearchTest extends BaseTest {
     @Test
     public void searchResultImages() {
         SearchModule searchModule = new SearchModule(driver);
-        driver.get("https://www.amazon.com");
+        driver.get(TestConstants.WEBSITE);
         searchModule.enterSearchString(TestConstants.SEARCH_STRING);
         searchModule.clickSearchButton();
 
@@ -257,7 +257,7 @@ public class SearchTest extends BaseTest {
     @Test
     public void searchPerformance() {
         SearchModule searchModule = new SearchModule(driver);
-        driver.get("https://www.amazon.com");
+        driver.get(TestConstants.WEBSITE);
 
         searchModule.enterSearchString(TestConstants.SEARCH_STRING);
         searchModule.clickSearchButton();
@@ -276,7 +276,7 @@ public class SearchTest extends BaseTest {
     @Test
     public void searchResultLinkValidity() {
         SearchModule searchModule = new SearchModule(driver);
-        driver.get("https://www.amazon.com");
+        driver.get(TestConstants.WEBSITE);
         searchModule.enterSearchString(TestConstants.SEARCH_STRING);
         searchModule.clickSearchButton();
         boolean testPassed = false;
