@@ -39,3 +39,4 @@ build/
 
 ## Credentials file ##
 domain/src/main/resources/credentials.txt
+domain/src/main/resources/proxy_file.txt
