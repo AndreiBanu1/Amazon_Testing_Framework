@@ -17,7 +17,7 @@ public class LoginTest extends BaseTest {
         driver = new ChromeDriver();
     }
 
-    @Test
+    @Test(description = "Verify login with invalid username.")
     public void testInvalidUsername() {
         LoginPage loginPage = new LoginPage(driver);
         driver.get(TestConstants.WEBSITE);
@@ -42,7 +42,7 @@ public class LoginTest extends BaseTest {
         }
     }
 
-    @Test
+    @Test(description = "Verify login with invalid password.")
     public void testInvalidPassword() {
         LoginCredentials loginCredentials = new LoginCredentials();
         LoginPage loginPage = new LoginPage(driver);
@@ -70,7 +70,7 @@ public class LoginTest extends BaseTest {
         }
     }
 
-    @Test()
+    @Test(description = "Verify login with valid credentials.")
     public void testValidLogin() {
         LoginCredentials loginCredentials = new LoginCredentials();
         LoginPage loginPage = new LoginPage(driver);

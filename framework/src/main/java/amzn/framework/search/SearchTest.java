@@ -3,6 +3,7 @@ package amzn.framework.search;
 import amzn.framework.core.BaseTest;
 import amzn.domain.constants.TestConstants;
 import amzn.pageobjects.searchmodule.SearchModule;
+import org.jetbrains.annotations.NotNull;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -17,29 +18,44 @@ import org.openqa.selenium.interactions.Actions;
 public class SearchTest extends BaseTest {
     private WebDriver driver;
     String sortMethod = "Price: Low to High";
-     @BeforeTest
-    public void setup() {
-         ChromeOptions options = new ChromeOptions();
-         options.addArguments("--headless");
-         driver = new ChromeDriver(options);
-    }
-    @Test
-    public void basicSearch() {
+    @NotNull
+    private Result getResult() {
         SearchModule searchModule = new SearchModule(driver);
         WebDriverWait wait = new WebDriverWait(driver, 10);
         driver.get(TestConstants.WEBSITE);
 
         searchModule.enterSearchString(TestConstants.SEARCH_STRING);
         searchModule.clickSearchButton();
+        Result result = new Result(searchModule, wait);
+        return result;
+    }
+    private static class Result {
+        public final SearchModule searchModule;
+        public final WebDriverWait wait;
 
-        WebElement searchResultsElement = wait.until(ExpectedConditions.presenceOfElementLocated(searchModule.getSearchResultsLocator()));
+        public Result(SearchModule searchModule, WebDriverWait wait) {
+            this.searchModule = searchModule;
+            this.wait = wait;
+        }
+    }
+    @BeforeTest
+    public void setup() {
+         ChromeOptions options = new ChromeOptions();
+         options.addArguments("--headless");
+         driver = new ChromeDriver(options);
+    }
+    @Test(description = "Verify basic search functionality for an item.")
+    public void basicSearch() {
+        Result result = getResult();
+
+        WebElement searchResultsElement = result.wait.until(ExpectedConditions.presenceOfElementLocated(result.searchModule.getSearchResultsLocator()));
         if (searchResultsElement.isDisplayed()) {
             System.out.println("Test BasicSearch Passed: Search results are displayed.");
         } else {
             System.out.println("Test BasicSearch Failed: Search results are not displayed.");
         }
     }
-    @Test
+    @Test(description = "Verify advanced search functionality for a category.")
     public void advancedSearch() {
         SearchModule searchModule = new SearchModule(driver);
         driver.get(TestConstants.WEBSITE);
@@ -56,7 +72,7 @@ public class SearchTest extends BaseTest {
             System.out.println("Test advancedSearch Failed: Search results are not displayed based on specific category selected");
         }
     }
-    @Test
+    @Test(description = "Verify the behavior of an empty search.")
     public void emptySearch() {
         SearchModule searchModule = new SearchModule(driver);
         driver.get(TestConstants.WEBSITE);
@@ -68,7 +84,7 @@ public class SearchTest extends BaseTest {
 
         Assert.assertEquals(currentURL, expectedURL, "Test Failed: Current URL is not the same as the initial URL");
     }
-    @Test
+    @Test(description = "Verify the search functionality based on search suggestion.")
     public void searchSuggestions() {
         SearchModule searchModule = new SearchModule(driver);
         driver.get(TestConstants.WEBSITE);
@@ -90,7 +106,7 @@ public class SearchTest extends BaseTest {
             System.out.println("Test searchSuggestions Failed: Search results are not displayed based on selected suggestion");
         }
     }
-    @Test
+    @Test(description = "Verify sorting option for search results.")
     public void searchResultSorting() {
         SearchModule searchModule = new SearchModule(driver);
         driver.get(TestConstants.WEBSITE);
@@ -111,7 +127,7 @@ public class SearchTest extends BaseTest {
             System.out.println("Test Case searchResultSorting Failed: Search results are not sorted by the expected method");
         }
     }
-    @Test
+    @Test(description = "Verify basic pagination and headers.")
     public void pagination() {
         SearchModule searchModule = new SearchModule(driver);
         driver.get(TestConstants.WEBSITE);
@@ -159,7 +175,7 @@ public class SearchTest extends BaseTest {
             System.out.println("Test case pagination Failed: One or more elements do not exist or are not displayed or the pagination does not work.");
         }
     }
-    @Test
+    @Test(description = "Verify the product details page navigation from search results.")
     public void productDetailsFromSearchResult() {
         SearchModule searchModule = new SearchModule(driver);
         driver.get(TestConstants.WEBSITE);
@@ -182,12 +198,12 @@ public class SearchTest extends BaseTest {
         String afterClickURL = driver.getCurrentUrl();
 
         if (!beforeClickURL.equals(afterClickURL)) {
-            System.out.println("Test productDetailsFromSearchResult Passed: Item page is displayed");
+            System.out.println("Test Case productDetailsFromSearchResult Passed: Item page is displayed");
         } else {
-            System.out.println("Test productDetailsFromSearchResult Failed: Item page is not displayed");
+            System.out.println("Test Case productDetailsFromSearchResult Failed: Item page is not displayed");
         }
     }
-    @Test
+    @Test(description = "Verify that the search results are valid.")
     public void searchResultValidation() {
         SearchModule searchModule = new SearchModule(driver);
         driver.get(TestConstants.WEBSITE);
@@ -208,7 +224,7 @@ public class SearchTest extends BaseTest {
             System.out.println("Test searchResultValidation Failed: Valid search results are not displayed");
         }
     }
-    @Test
+    @Test(description = "Verify the search across multiple categories.")
     public void searchAcrossMultipleCategories() {
         SearchModule searchModule = new SearchModule(driver);
         driver.get(TestConstants.WEBSITE);
@@ -233,7 +249,7 @@ public class SearchTest extends BaseTest {
             System.out.println("Test searchAcrossMultipleCategories Failed: Search results are not displayed with filters applied.");
         }
     }
-    @Test
+    @Test(description = "Verify the search result's images.")
     public void searchResultImages() {
         SearchModule searchModule = new SearchModule(driver);
         driver.get(TestConstants.WEBSITE);
@@ -254,7 +270,7 @@ public class SearchTest extends BaseTest {
             System.out.println("Number of images: " + imagesNo);
         }
     }
-    @Test
+    @Test(description = "Verify the search performance.")
     public void searchPerformance() {
         SearchModule searchModule = new SearchModule(driver);
         driver.get(TestConstants.WEBSITE);

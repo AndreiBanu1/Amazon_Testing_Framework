@@ -9,10 +9,10 @@ public class ProductDetails extends BasePage {
     private By productDetailsHeaderLocator = By.id("productTitle");
     private By productDetailsReviewLocator = By.id("averageCustomerReviews");
     private By productDetailsAddToCartButtonLocator = By.id("add-to-cart-button");
-    private By productDetailsDescriptionLocator = By.className("a-section");
+    private By productDetailsDescriptionLocator = By.id("feature-bullets");
     private By productDetailsPriceLocator = By.className("a-offscreen");
     private By productDetailsAvailabilityLocator = By.id("availability");
-    private By productDetailsReviewsCountLocator = By.xpath("//*[@id=\"reviewsMedley\"]/div/div[1]/span[1]/span/div[3]/span");
+    private By productDetailsReviewsCountLocator = By.id("acrCustomerReviewText");
     private By productDetailsMoreItemsToExploreLocator = By.className("a-carousel-row");
 
     public By getProductDetailsMoreItemsToExploreLocator() {
