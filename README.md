@@ -53,7 +53,7 @@ This module will contain the BasePage.java and BaseTest.java files and also any 
 
 This project structure provides a modular and organized approach to develop and test the application. Each module has specific responsibilities, enabling better maintainability and testability of the codebase.
 
-The project contains the following test scenerios: </br>
+The project contains the following test scenerios: <br>
   ### I. Login Module:
   a) test with valid credentials; <br>
   b) test with invalid username;<br>
@@ -108,29 +108,29 @@ l) Search Result Link Validity:<br>
     - Test clicking on various search result links to ensure that they are valid and lead to the correct product or category pages.<br>
 
 ### III. Product Details Module:<br>
-a) Test verifying the product title:
-    - Verify that the product title is displayed correctly on the page.
+a) Test verifying the product title:<br>
+    - Verify that the product title is displayed correctly on the page.<br>
 
 b) Test verifying the product description:<br>
-    - Verify that the product description is displayed correctly on the page.
+    - Verify that the product description is displayed correctly on the page.<br>
 
 c) Test verifying the product price:<br>
-    - Verify that the product price is displayed correctly on the page.
+    - Verify that the product price is displayed correctly on the page.<br>
 
 d) Test verifying the product availability:<br>
-    - Verify that the product availability information is displayed correctly on the page.
+    - Verify that the product availability information is displayed correctly on the page.<br>
 
 e) Test verifying the customer reviews:<br>
-    - Verify that the customer reviews section is displayed on the page.
-    - Check the rating and number of reviews for the product.
+    - Verify that the customer reviews section is displayed on the page.<br>
+    - Check the rating and number of reviews for the product.<br>
 
 f) Test verifying related products:<br>
-    - Verify that the related products section is displayed on the page.
-    - Check the related products and verify that they are relevant to the current product.
+    - Verify that the related products section is displayed on the page.<br>
+    - Check the related products and verify that they are relevant to the current product.<br>
 
 g) Test adding the product to the cart from the product details page:<br>
-    - Click on the "Add to Cart" button.
-    - Verify that the product is added to the cart successfully.
+    - Click on the "Add to Cart" button.<br>
+    - Verify that the product is added to the cart successfully.<br>
 
 h) Test the product details image:<br>
-    - Verify that the product has a valid image.
+    - Verify that the product has a valid image.<br>
