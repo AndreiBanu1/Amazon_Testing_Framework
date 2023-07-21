@@ -106,3 +106,31 @@ k) Search Result Images:<br>
 
 l) Search Result Link Validity:<br>
     - Test clicking on various search result links to ensure that they are valid and lead to the correct product or category pages.<br>
+
+### III. Product Details Module:<br>
+a) Test verifying the product title:
+    - Verify that the product title is displayed correctly on the page.
+
+b) Test verifying the product description:<br>
+    - Verify that the product description is displayed correctly on the page.
+
+c) Test verifying the product price:<br>
+    - Verify that the product price is displayed correctly on the page.
+
+d) Test verifying the product availability:<br>
+    - Verify that the product availability information is displayed correctly on the page.
+
+e) Test verifying the customer reviews:<br>
+    - Verify that the customer reviews section is displayed on the page.
+    - Check the rating and number of reviews for the product.
+
+f) Test verifying related products:<br>
+    - Verify that the related products section is displayed on the page.
+    - Check the related products and verify that they are relevant to the current product.
+
+g) Test adding the product to the cart from the product details page:<br>
+    - Click on the "Add to Cart" button.
+    - Verify that the product is added to the cart successfully.
+
+h) Test the product details image:<br>
+    - Verify that the product has a valid image.
